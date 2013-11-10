@@ -6,7 +6,8 @@ function processPage(depth) {
 	}
 
 	// Remove possible video element to avoid random sounds playing
-	removeVideos();
+	// Do this continuously in case of JS loading in videos
+	window.setInterval(removeVideos, 500);
 
 	var allLinks = document.getElementsByTagName('a');
 	linkCount = allLinks.length;
