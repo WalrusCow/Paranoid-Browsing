@@ -6,7 +6,7 @@ var currentDepth = 0;
 
 // Returns a random top-level site to start browsing from
 function getNewSite() {
-	var topSites
+	var topSites;
 	if ( localStorage["pbPageList"] == undefined ){
 		topSites = new Array(); //no topsites list configured yet, use defaults
 	}else{
@@ -76,7 +76,7 @@ function tabUpdated(tabId, changeInfo, tab) {
 		chrome.tabs.get(extTabId, function(tab) {
 			if(tab != undefined && tab.url == changeInfo.url) {
 				console.log('Page timed out. Restarting');
-				performInitialNavigation()
+				performInitialNavigation();
 			}
 		})
 	}, 20000);
