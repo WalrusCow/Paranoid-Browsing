@@ -34,14 +34,14 @@ function processPage(depth) {
 	var waitTime = Math.floor(Math.random() * 10000) + 5000;
 	setTimeout(function() {
 		console.log('Paranoid: sending to: ' + newAddress);
-		newLink.click();
+		window.location = newAddress;
 	}, waitTime);
 }
 
 function removeVideos() {
 	/* Remove possible video tags from page to avoid sound playing. */
 	// Tags to remove
-	var VIDEO_TAGS = ['object', 'embed'];
+	var VIDEO_TAGS = ['object', 'embed', 'video'];
 
 	// Function for shorthand removal of nodes
 	function removeNode(node) {
