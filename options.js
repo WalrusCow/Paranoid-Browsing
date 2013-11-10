@@ -4,14 +4,14 @@
 function saveData(){
 	var pageList = [];
 	var inputElems = document.getElementsByName('startPage');
-	for(var idx = 0; idx < 10; idx++) {
+	for(var idx = 0; idx < inputElems.length; idx++) {
 		var page = inputElems[idx];
 		if(page.value) {
 			pageList.push(page.value);
 		}
 	}
 
-	localStorage['pbPageList'] = JSON.stringify(pageList);
+	localStorage.pbPageList = JSON.stringify(pageList);
 
 	// Reload to move up any missing lines etc.
 	loadData();
@@ -19,15 +19,19 @@ function saveData(){
 
 function loadData(){
 	// Very first time loading PB
-	if(!localStorage['pbPageList']) {
+	if(!localStorage.pbPageList) {
 		restoreDefaults();
 		return;
 	}
 
-	var pageList = JSON.parse(localStorage['pbPageList']);
+	var pageList = JSON.parse(localStorage.pbPageList);
+	updateInputs(pageList);
+}
+
+function updateInputs(siteList) {
 	var inputElems = document.getElementsByName('startPage');
-	for(var idx = 0; idx < 10; idx++) {
-		inputElems[idx].value = pageList[idx] ? pageList[idx] : '';
+	for(var idx = 0; idx < inputElems.length; idx++) {
+		inputElems[idx].value = siteList[idx] ? siteList[idx] : '';
 	}
 }
 
@@ -42,11 +46,7 @@ function restoreDefaults() {
 					'http://www.msn.com',
 					'http://www.aol.com'];
 
-	var inputElems = document.getElementsByName('startPage');
-	for(var idx = 0; idx < 10; idx++) {
-		inputElems[idx].value = topSites[idx] ? topSites[idx] : '';
-	}
-
+	updateInputs(topSites);
 	saveData();
 }
 
